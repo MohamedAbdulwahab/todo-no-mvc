@@ -16,9 +16,9 @@ This is a Simple ToDo App that I built to mainly practice Node.js, Express.js, a
 
 # How to Use
 
-Install all the dependencies or node packages used for development via Terminal
+> Install all the dependencies or node packages used for development via Terminal
 > `npm install`
 > Create a `config` folder and create a `config.env` file inside
 > add the following as `key: value` 
-  - PORT: 8000 (can be any port example: 3000) 
-  - MONGO_URI: `your database URI`
+> PORT: 8000 (can be any port example: 3000) 
+> MONGO_URI: `your database URI`

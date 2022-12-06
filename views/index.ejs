@@ -5,11 +5,26 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>tood-no-mvc</title>
+	<title>Document</title>
 </head>
 
 <body>
-	<h1>Hello from todo-no-mvc-backend</h1>
+	<h1>Todo List: </h1>
+	<ul class="todoItems">
+
+	</ul>
+
+	<h2>Left to do: </h2>
+
+	<h2>Add A Todo:</h2>
+
+	<form action="/addTodo" method="POST">
+		<input type="text" placeholder="Thing To Do" name="todoItem">
+		<input type="submit">
+	</form>
+
+
+	<script src='js/main.js'></script>
 </body>
 
 </html>

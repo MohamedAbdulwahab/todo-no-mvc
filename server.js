@@ -29,16 +29,35 @@ app.use(express.json())
  * Routers
  ***************************/
 app.get('/', async (request, response) => {
-	const todoItems = await db.collection('todos').find().toArray();
-	const itemsLeft = await db.collection('todos').countDocuments({ completed: false });
-	response.render('index.ejs', { items: todoItems, left: itemsLeft });
+	try {
+		const todoItems = await db.collection('todos').find().toArray();
+		const itemsLeft = await db.collection('todos').countDocuments({ completed: false });
+		response.render('index.ejs', { items: todoItems, left: itemsLeft });
+	} catch(error) {
+		console.log(error);
+	}
 });
 
 app.post('/addTodo', async (request, response) => {
-	const result = await db.collection('todos').insertOne({ thing: request.body.todoItem, completed: false })
-	console.log('todo added');
-	response.redirect('/');
+	try {
+		const result = await db.collection('todos').insertOne({ thing: request.body.todoItem, completed: false })
+		console.log('todo added');
+		response.redirect('/');
+	} catch(error) {
+		console.log(error);
+	}
 });
+
+app.delete('/deleteItem', async (request, response) => {
+	try {
+		const deleteItem = await db.collection('todos').deleteOne({ thing: request.body.itemFromJS });
+		console.log('Todo Deleted');
+		response.json('Todo Delted');
+	} catch(error) {
+		console.log(error);
+	}
+});
+
 
 
 

@@ -48,6 +48,42 @@ app.post('/addTodo', async (request, response) => {
 	}
 });
 
+app.put('/markComplete', async (request, response) => {
+	try {
+		const update = await db.collection('todos').updateOne({ thing: request.body.itemFromJS }, {
+			$set: {
+				completed: true
+			}
+		}, {
+			sort: {_id: -1},
+        	upsert: false
+		});
+		console.log('Marked Complete from server /markComplete');
+		response.json('Marked Complete');
+
+	} catch(error) {
+		console.log(error);
+	}
+});
+
+app.put('/markUncomplete', async (request, response) => {
+	try {
+		const update = await db.collection('todos').updateOne({ thing: request.body.itemFromJS}, {
+			$set: {
+				completed: false
+			}
+		}, {
+			sort: {_id: -1},
+        	upsert: false
+		});
+		console.log('Marked Uncomplete from server /markUncomplete');
+		response.json('Marked Uncomplete');
+
+	} catch(error) {
+		console.log(error);
+	}
+});
+
 app.delete('/deleteItem', async (request, response) => {
 	try {
 		const deleteItem = await db.collection('todos').deleteOne({ thing: request.body.itemFromJS });
@@ -57,12 +93,6 @@ app.delete('/deleteItem', async (request, response) => {
 		console.log(error);
 	}
 });
-
-
-
-
-
-
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
